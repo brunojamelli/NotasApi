@@ -14,20 +14,16 @@ namespace MinhaApi.Controllers
             _notaService = notaService;
         }
 
-        // GET: api/Notas
-        [HttpGet]
-        // public ActionResult<IEnumerable<Nota>> GetNotas()
-        // {
-        //     return Ok(_notaService.GetAll());
-        // }
         [HttpGet]
         public ActionResult<IEnumerable<NotaDto>> GetNotas()
         {
             var notas = _notaService.GetAll().Select(n => new NotaDto
             {
+                Id = n.Id,
                 NomeAluno = n.NomeAluno,
                 NomeMateria = n.NomeMateria,
-                Conceito = n.Conceito
+                Conceito = n.Conceito,
+                NotasAdicionais = n.NotasAdicionais
             });
             return Ok(notas);
         }
